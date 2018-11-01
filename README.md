@@ -12,6 +12,6 @@ Link- https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads/
 
 * I2c scanner may be required to identify the address if using an off brand LDC model (reference datasheet from the part numbers provided)
 
-Scanner source code along with a few other LCD example tutorials can be found here.
+Scanner source code along with other LCD examples can be found here.
 Link- https://dronebotworkshop.com/lcd-displays-arduino/
 
