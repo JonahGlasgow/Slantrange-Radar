@@ -74,8 +74,6 @@ void setup()
 
    // LCD Size
 
-
-
   lcd.begin(16,2);        
 
   // LCD text
