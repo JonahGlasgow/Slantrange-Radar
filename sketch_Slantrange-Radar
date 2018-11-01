@@ -1,0 +1,150 @@
+
+
+//Libraries
+
+
+// Include Wire Library for I2C
+#include <Wire.h>                
+// Include NewLiquidCrystal Library for I2C
+#include <LiquidCrystal_I2C.h>   //Display Library
+
+#include <NewPing.h>             //Sensor Library
+
+
+
+//Display
+
+
+
+// Define LCD pinout
+const int  en = 2, rw = 1, rs = 0, d4 = 4, d5 = 5, d6 = 6, d7 = 7, bl = 3;
+ 
+// Define I2C Address - change if reqiuired
+const int i2c_addr = 0x3F;
+ 
+LiquidCrystal_I2C lcd(i2c_addr, en, rw, rs, d4, d5, d6, d7, bl, POSITIVE);
+ 
+
+
+
+
+
+
+//Sensor
+
+
+
+#define TRIGGER_PIN  12  // Arduino pin tied to trigger pin on the ultrasonic sensor.
+
+#define ECHO_PIN     11  // Arduino pin tied to echo pin on the ultrasonic sensor.
+
+#define MAX_DISTANCE 400 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
+
+
+
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
+
+
+
+
+
+//variables
+
+
+
+int val1 = 0;
+
+int analog1 = 0;
+
+int val2 = 0;
+
+int analog2 = 0;
+
+
+
+//setup
+
+
+
+void setup()   
+
+{
+
+ 
+
+   // LCD Size
+
+
+
+  lcd.begin(16,2);        
+
+  // LCD text
+  
+  lcd.print("By Jonah GLasgow");
+
+  delay(4000);  
+
+  lcd.setCursor(1,1);
+
+  lcd.print("www.LWTech.edu");
+
+  lcd.setCursor(0,0);
+
+  delay(4000);   
+
+  
+
+
+
+
+
+}
+
+
+
+void loop()   //main loop
+
+{
+
+
+
+
+
+  
+
+  delay(40);     // Wait 40ms between pings.
+
+
+
+
+
+  unsigned int uS = sonar.ping();  // Send ping, get ping time in microseconds (uS).
+
+  
+
+  lcd.clear();                     // Clear screen
+
+  
+
+  lcd.setCursor(1,0);              // Set Cursor
+
+  lcd.print("Current Range");        // text
+
+  
+
+  lcd.setCursor(1,2);              // move Cursor
+
+  lcd.print("Distance: ");         // Print "Distance"
+
+  lcd.setCursor(11,2);             // move Cursor
+
+  lcd.print(uS / US_ROUNDTRIP_CM); // Convert ping time to distance in cm and print result (0 = outside set distance range)
+
+  lcd.setCursor(13,2);             // move Cursor
+
+  lcd.print("cm");                 // print distance 
+
+  
+
+}
+
